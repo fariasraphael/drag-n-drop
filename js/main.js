@@ -1,6 +1,7 @@
 let form = document.getElementsByTagName("form")[0];
 let newCardButton = document.getElementsByTagName("button")[0];
 
+
 newCardButton.addEventListener("click", () => {
     form.classList.remove("d-none");
 
@@ -18,35 +19,37 @@ form.addEventListener("submit", (e) => {
 
 function createNewCard(title, description) {
     let divNewCard = document.createElement("div");
-    divNewCard.classList.add("card d-flex flex-row-reverse align-items-start");
+    divNewCard.classList.add("card", "d-flex", "flex-row-reverse", "align-items-start");
     divNewCard.style.width = "18rem";
 
     let buttonEdit = document.createElement("a");
-    buttonEdit.classList("btn btn-primary");
-    buttonEdit.innerHTML = "*"
+    buttonEdit.classList.add("btn", "btn-primary");
+    buttonEdit.innerHTML = "*";
     
     let buttonDelete = document.createElement("a");
-    buttonDelete.classList("btn btn-primary");
+    buttonDelete.classList.add("btn", "btn-primary");
     buttonDelete.innerHTML = "-";
+    buttonDelete.addEventListener("click", e =>{
+        e.target.parentElement.remove();
+    })
 
     let divNewCardBody = document.createElement("div");
     divNewCardBody.classList.add("card-body")
 
-    let titleH3 = document.createElement("h3");
-    titleH3.innerHTML = title;
-    let descriptionH5 = document.createElement("h5");
-    descriptionH5.innerHTML = description;
+    let titleH5 = document.createElement("h5");
+    titleH5.innerHTML = title;
+    let descriptionP = document.createElement("p");
+    descriptionP.innerHTML = description;
 
+    divNewCardBody.appendChild(titleH5)
+    divNewCardBody.appendChild(descriptionP)
+    
+    divNewCard.appendChild(buttonDelete);
+    divNewCard.appendChild(buttonEdit);
+    divNewCard.appendChild(divNewCardBody)
 
-
-
-
-
-    console.log(titleH3, descriptionH5);
-
-    //divNewCard.classList.add("d-flex flex-row");
-
-
+    let body = document.getElementsByTagName("body")[0];
+    body.insertBefore(divNewCard, null);
 }
 
 

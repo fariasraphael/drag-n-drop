@@ -11,18 +11,30 @@
 </head>
 
 <body>
-    <button>+</button>
-    <form class="d-flex flex-column align-items-start d-none">
-        <label for="title">Titulo</label>
-        <input type="text" id="title" style="width: 18rem;">
-        <label for="descirption">Descrição</label>
-        <textarea name="description" id="descirption" cols="15" rows="3 " style="width: 18rem;"></textarea>
-        <div>
-            <input type="submit" value="submit">
-            <input type="reset" value="reset">
+    <div class="container text-center">
+        <div class="row">
+          <div class="col" id="toDo">
+            <button>+</button>
+            <form class="d-flex flex-column align-items-start d-none">
+                <label for="title">Titulo</label>
+                <input type="text" id="title" style="width: 16rem;">
+                <label for="descirption">Descrição</label>
+                <textarea name="description" id="descirption" cols="15" rows="3 " style="width: 16rem;"></textarea>
+                <div>
+                    <input type="submit" value="submit">
+                    <input type="reset" value="reset">
+                </div>
+            </form>
+          </div>
+          <div class="col">
+            Column
+          </div>
+          <div class="col">
+            Column
+          </div>
         </div>
-    </form>
-    <script src="./js/main.js"></script>
+      </div>
+      <script src="./js/main.js"></script>
 </body>
 
 </html>

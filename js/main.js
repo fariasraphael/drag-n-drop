@@ -19,7 +19,7 @@ form.addEventListener("submit", (e) => {
 function createNewCard(title, description) {
     let divNewCard = document.createElement("div");
     divNewCard.classList.add("card", "d-flex", "flex-row-reverse", "align-items-start");
-    divNewCard.style.width = "18rem";
+    divNewCard.style.width = "16rem";
 
     let buttonEdit = document.createElement("a");
     buttonEdit.classList.add("btn", "btn-primary");
@@ -29,7 +29,7 @@ function createNewCard(title, description) {
     })
 
     let buttonDelete = document.createElement("a");
-    buttonDelete.classList.add("btn", "btn-primary");
+    buttonDelete.classList.add("btn", "btn-outline-danger");
     buttonDelete.innerHTML = "-";
     buttonDelete.addEventListener("click", e => {
         e.target.parentElement.remove();
@@ -50,7 +50,7 @@ function createNewCard(title, description) {
     divNewCard.appendChild(buttonEdit);
     divNewCard.appendChild(divNewCardBody)
 
-    let body = document.getElementsByTagName("body")[0];
+    let body = document.getElementById("toDo");
     body.insertBefore(divNewCard, null);
 }
 

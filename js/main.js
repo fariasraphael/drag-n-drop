@@ -11,7 +11,6 @@ form.addEventListener("submit", (e) => {
     e.preventDefault();
     let title = form.elements["title"].value
     let description = form.elements["descirption"].value
-    console.log(title, description);
     form.classList.add("d-none");
     form.reset();
     createNewCard(title, description);
@@ -25,11 +24,14 @@ function createNewCard(title, description) {
     let buttonEdit = document.createElement("a");
     buttonEdit.classList.add("btn", "btn-primary");
     buttonEdit.innerHTML = "*";
-    
+    buttonEdit.addEventListener("click", e => {
+        editTask(e)
+    })
+
     let buttonDelete = document.createElement("a");
     buttonDelete.classList.add("btn", "btn-primary");
     buttonDelete.innerHTML = "-";
-    buttonDelete.addEventListener("click", e =>{
+    buttonDelete.addEventListener("click", e => {
         e.target.parentElement.remove();
     })
 
@@ -43,13 +45,23 @@ function createNewCard(title, description) {
 
     divNewCardBody.appendChild(titleH5)
     divNewCardBody.appendChild(descriptionP)
-    
+
     divNewCard.appendChild(buttonDelete);
     divNewCard.appendChild(buttonEdit);
     divNewCard.appendChild(divNewCardBody)
 
     let body = document.getElementsByTagName("body")[0];
     body.insertBefore(divNewCard, null);
+}
+
+function editTask(element) {
+    let titleEdit = element.target.parentElement. children[2].firstChild.innerHTML;
+    let descriptionEdit = element.target.parentElement. children[2].lastChild.innerHTML;
+    console.log(titleEdit, descriptionEdit);
+    form.classList.remove("d-none")
+    form.elements["title"].value = titleEdit;
+    form.elements["descirption"].value = descriptionEdit;
+    element.target.parentElement.remove();
 }
 
 

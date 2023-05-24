@@ -3,8 +3,7 @@ let newCardButton = document.getElementsByTagName("button")[0];
 
 
 newCardButton.addEventListener("click", () => {
-    form.classList.remove("d-none");
-
+    form.classList.contains("d-none") ? form.classList.remove("d-none") : form.classList.add("d-none");
 });
 
 form.addEventListener("submit", (e) => {
@@ -63,5 +62,3 @@ function editTask(element) {
     form.elements["descirption"].value = descriptionEdit;
     element.target.parentElement.remove();
 }
-
-

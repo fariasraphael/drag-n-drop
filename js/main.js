@@ -14,37 +14,32 @@ newCardButton.addEventListener("click", () => {
 
 form.addEventListener("submit", (e) => {
     e.preventDefault();
-    
+
     let title = form.elements['title'].value;
     let description = form.elements['descirption'].value;
     form.classList.add("d-none");
     form.reset();
-    
+
     const taskCard = {
         title: title,
         description: description
     }
     const exist = taskCards.find(element => element.title === title);
-    
-    console.log(exist);
 
     if (exist) {
         taskCard.id = exist.id;
         taskCards[taskCards.findIndex(elemento => elemento.id === exist.id)] = taskCard;
         newCardButton.innerHTML = "+";
     } else {
-        taskCard.id = taskCards[taskCards.length -1] ? (taskCards[taskCards.length -1]).id +1 : 0;
+        taskCard.id = taskCards[taskCards.length - 1] ? (taskCards[taskCards.length - 1]).id + 1 : 0;
 
         createNewCard(taskCard);
-        taskCards.push(taskCard)
-    
-        console.log(taskCard.id);
-
+        taskCards.push(taskCard);
     }
 });
 
 function createNewCard(taskCard) {
-    
+
     let divNewCard = document.createElement("div");
     divNewCard.classList.add("card", "d-flex", "flex-row-reverse", "align-items-start");
     divNewCard.style.width = "16rem";
@@ -60,13 +55,16 @@ function createNewCard(taskCard) {
     buttonDelete.classList.add("btn", "btn-outline-danger");
     buttonDelete.innerHTML = "-";
     buttonDelete.addEventListener("click", e => {
+        const index = e.target.parentElement.dataset.id
+        taskCards.splice(index, 1)
         e.target.parentElement.remove();
-    })
+    });
 
     let divNewCardBody = document.createElement("div");
     divNewCardBody.classList.add("card-body");
     divNewCard.draggable = true;
-    divNewCard.id = "draggable-item["+taskCard.id+"]";
+    divNewCard.id = "draggable-item[" + taskCard.id + "]";
+    divNewCard.dataset.id = taskCard.id;
 
 
     let titleH5 = document.createElement("h5");
@@ -80,8 +78,8 @@ function createNewCard(taskCard) {
     divNewCard.appendChild(buttonDelete);
     divNewCard.appendChild(buttonEdit);
     divNewCard.appendChild(divNewCardBody)
-    
-    
+
+
 
     let body = document.getElementById("toDo");
     body.insertBefore(divNewCard, null);

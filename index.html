@@ -14,15 +14,15 @@
     <div class="container">
         <div class="row">
           <div class="col" id="toDo" dropzone>
-            <button style="width: 25px; height: 30px;">+</button>
+            <button type="button" class="btn btn-primary" style="padding: 0; width: 25px; height: 30px;" >+</button>
             <form class="d-flex flex-column align-items-start d-none">
                 <label for="title">Titulo</label>
                 <input type="text" id="title" style="width: 16rem;">
                 <label for="descirption">Descrição</label>
                 <textarea name="description" id="descirption" cols="15" rows="3 " style="width: 16rem;"></textarea>
                 <div>
-                    <input type="submit" value="submit">
-                    <input type="reset" value="reset">
+                    <input type="submit" value="submit" class="btn btn-primary">
+                    <input type="reset" value="reset" class="btn btn-outline-danger">
                 </div>
             </form>
           </div>

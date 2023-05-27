@@ -9,7 +9,7 @@ let done = document.querySelector(".done");
 
 newCardButton.addEventListener("click", () => {
     form.classList.contains("d-none") ? form.classList.remove("d-none") : form.classList.add("d-none");
-    newCardButton.innerHTML === "+" ? newCardButton.innerHTML = "-" : newCardButton.innerHTML = "+"
+    form.classList.contains("d-none") ? newCardButton.innerHTML = "+" : newCardButton.innerHTML = "-"
 });
 
 form.addEventListener("submit", (e) => {
@@ -31,6 +31,7 @@ form.addEventListener("submit", (e) => {
     if (exist) {
         taskCard.id = exist.id;
         taskCards[taskCards.findIndex(elemento => elemento.id === exist.id)] = taskCard;
+        newCardButton.innerHTML = "+";
     } else {
         taskCard.id = taskCards[taskCards.length -1] ? (taskCards[taskCards.length -1]).id +1 : 0;
 
@@ -41,19 +42,6 @@ form.addEventListener("submit", (e) => {
 
     }
 });
-
-//function cardTaskId () {
-//    const exist = taskCards.find(elemento => elemento.title === title.value)
-
-//    let taskCards = document.querySelectorAll(".card");
-  //  divNewCard.id = "draggable-item" + taskCards.length;
- //   if (taskCards.id === divNewCard.id) {
-  //      divNewCard.id = "draggable-item" + taskCards.length+1;
-  //  } else {
-  //      divNewCard.id = "draggable-item" + taskCards.length;
-  //  }
-//}
-
 
 function createNewCard(taskCard) {
     
@@ -97,6 +85,8 @@ function createNewCard(taskCard) {
 
     let body = document.getElementById("toDo");
     body.insertBefore(divNewCard, null);
+
+    newCardButton.innerHTML = "+";
 
     dragStart(divNewCard);
 

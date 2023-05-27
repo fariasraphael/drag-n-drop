@@ -13,8 +13,8 @@
 <body>
     <div class="container">
         <div class="row">
-          <div class="col" id="toDo">
-            <button>+</button>
+          <div class="col" id="toDo" dropzone>
+            <button style="width: 25px; height: 30px;">+</button>
             <form class="d-flex flex-column align-items-start d-none">
                 <label for="title">Titulo</label>
                 <input type="text" id="title" style="width: 16rem;">
@@ -26,10 +26,10 @@
                 </div>
             </form>
           </div>
-          <div class="col">
+          <div class="col" id="doing" dropzone>
             Column
           </div>
-          <div class="col">
+          <div class="col" id="done" dropzone>
             Column
           </div>
         </div>

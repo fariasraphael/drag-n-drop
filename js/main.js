@@ -91,7 +91,8 @@ function createNewCard(taskCard) {
     divNewCard.appendChild(divNewCardBody);
 
     divNewCard.ondragstart = event => {
-        event.dataTransfer.setData("tarefa-id", event.target.id);
+        event.dataTransfer.setData("taskCard-id", event.target.id);
+       console.log(event.target.id);
         if (divNewCard.parentElement === todo) {
             todo.classList.remove("avaliable-to-drop");
             doing.classList.add("avaliable-to-drop");
@@ -105,6 +106,7 @@ function createNewCard(taskCard) {
             doing.classList.add("avaliable-to-drop");
             todo.classList.add("avaliable-to-drop");
         }
+        
     }
 
 
@@ -115,24 +117,12 @@ function createNewCard(taskCard) {
 }
 
 
-function editTask(element) {
-    let titleEdit = element.target.parentElement.children[2].firstChild.innerHTML;
-    let descriptionEdit = element.target.parentElement.children[2].lastChild.innerHTML;
-    console.log(titleEdit, descriptionEdit);
-    form.classList.remove("d-none")
-    form.elements["title"].value = titleEdit;
-    form.elements["descirption"].value = descriptionEdit;
-    element.target.parentElement.remove();
-
-}
-
-
 let dropzones = document.querySelectorAll("[dropzone]")
 dropzones.forEach(dropzone => {
     if (dropzone instanceof HTMLDivElement) {
         dropzone.ondragover = e => e.preventDefault();
         dropzone.ondrop = e => {
-            let id = e.dataTransfer.getData("item-id");
+            let id = e.dataTransfer.getData("taskCard-id");
             let taskCard = document.getElementById(id);
 
             e.target.appendChild(taskCard);
@@ -143,26 +133,13 @@ dropzones.forEach(dropzone => {
     }
 });
 
+function editTask(element) {
+    let titleEdit = element.target.parentElement.children[2].firstChild.innerHTML;
+    let descriptionEdit = element.target.parentElement.children[2].lastChild.innerHTML;
+    console.log(titleEdit, descriptionEdit);
+    form.classList.remove("d-none")
+    form.elements["title"].value = titleEdit;
+    form.elements["descirption"].value = descriptionEdit;
+    element.target.parentElement.remove();
 
-
-
-
-function dragStart(element) {
-
-    element.ondragstart = event => {
-        event.dataTransfer.setData("tarefa-id", event.target.id);
-        if (element.parentElement === todo) {
-            todo.classList.remove("avaliable-to-drop");
-            doing.classList.add("avaliable-to-drop");
-            done.classList.add("avaliable-to-drop");
-        } else if (element.parentElement === doing) {
-            doing.classList.remove("avaliable-to-drop");
-            todo.classList.add("avaliable-to-drop");
-            done.classList.add("avaliable-to-drop");
-        } else {
-            done.classList.remove("avaliable-to-drop");
-            doing.classList.add("avaliable-to-drop");
-            todo.classList.add("avaliable-to-drop");
-        }
-    }
 }

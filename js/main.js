@@ -1,10 +1,15 @@
 let form = document.getElementsByTagName("form")[0];
 let newCardButton = document.getElementsByTagName("button")[0];
-let taskCards = []
+let taskCards = JSON.parse(localStorage.getItem("taskCard")) || []
 
 let todo = document.querySelector(".todo");
 let doing = document.querySelector(".doing");
 let done = document.querySelector(".done");
+
+taskCards.forEach(elemento => {
+    createNewCard(elemento);
+})
+
 
 
 newCardButton.addEventListener("click", () => {
@@ -36,6 +41,7 @@ form.addEventListener("submit", (e) => {
         createNewCard(taskCard);
         taskCards.push(taskCard);
     }
+    localStorage.setItem("taskCard", JSON.stringify(taskCards));
 });
 
 function createNewCard(taskCard) {
@@ -55,9 +61,14 @@ function createNewCard(taskCard) {
     buttonDelete.classList.add("btn", "btn-outline-danger");
     buttonDelete.innerHTML = "-";
     buttonDelete.addEventListener("click", e => {
-        const index = e.target.parentElement.dataset.id
-        taskCards.splice(index, 1)
+
+
+
+        taskCards.splice(taskCards.findIndex(elemento => elemento.id == e.target.parentElement.dataset.id), 1);
         e.target.parentElement.remove();
+
+
+        localStorage.setItem("taskCard", JSON.stringify(taskCards));
     });
 
     let divNewCardBody = document.createElement("div");
@@ -86,7 +97,7 @@ function createNewCard(taskCard) {
 
     newCardButton.innerHTML = "+";
 
-    dragStart(divNewCard);
+    //dragStart(divNewCard);
 
 }
 
@@ -102,22 +113,43 @@ function editTask(element) {
 
 }
 
-function dragStart(element) {
 
-    element.ondragstart = event => {
-        event.dataTransfer.setData("tarefa-id", event.target.id);
-        if (element.parentElement === todo) {
+let dropzones = document.querySelectorAll("[dropzone]")
+dropzones.forEach(dropzone => {
+    if (dropzone instanceof HTMLDivElement) {
+        dropzone.ondragover = e => e.preventDefault();
+        dropzone.ondrop = e => {
+            let id = e.dataTransfer.getData("item-id");
+            let taskCard = document.getElementById(id);
+
+            e.target.appendChild(taskCard);
             todo.classList.remove("avaliable-to-drop");
-            doing.classList.add("avaliable-to-drop");
-            done.classList.add("avaliable-to-drop");
-        } else if (element.parentElement === doing) {
             doing.classList.remove("avaliable-to-drop");
-            todo.classList.add("avaliable-to-drop");
-            done.classList.add("avaliable-to-drop");
-        } else {
             done.classList.remove("avaliable-to-drop");
-            doing.classList.add("avaliable-to-drop");
-            todo.classList.add("avaliable-to-drop");
         }
     }
-}
+});
+
+
+
+
+
+/* function dragStart(element) { */
+/*  */
+/*     element.ondragstart = event => { */
+/*         event.dataTransfer.setData("tarefa-id", event.target.id); */
+/*         if (element.parentElement === todo) { */
+/*             todo.classList.remove("avaliable-to-drop"); */
+/*             doing.classList.add("avaliable-to-drop"); */
+/*             done.classList.add("avaliable-to-drop"); */
+/*         } else if (element.parentElement === doing) { */
+/*             doing.classList.remove("avaliable-to-drop"); */
+/*             todo.classList.add("avaliable-to-drop"); */
+/*             done.classList.add("avaliable-to-drop"); */
+/*         } else { */
+/*             done.classList.remove("avaliable-to-drop"); */
+/*             doing.classList.add("avaliable-to-drop"); */
+/*             todo.classList.add("avaliable-to-drop"); */
+/*         } */
+/*     } */
+/* } */

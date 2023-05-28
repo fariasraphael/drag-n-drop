@@ -12,10 +12,18 @@
 </head>
 
 <body>
+    <nav class="navbar bg-body-tertiary">
+        <div class="container-fluid bg-primary bg-gradient">
+          <a class="navbar-brand text-light" href="#">
+           <strong>Kanban Board</strong> 
+          </a>
+        </div>
+      </nav>
     <div class="container">
         <div class="row">
           <div class="col" id="todo" dropzone>
-            <button type="button" class="btn btn-primary" style="padding: 0; width: 25px; height: 30px;" >+</button>
+            <h2>To do</h2>
+            <button type="button" class="btn btn-primary" style="padding: 0; width: 25px; height: 30px;" id="newCardButton">+</button>
             <form class="d-flex flex-column align-items-start d-none">
                 <label for="title">Titulo</label>
                 <input type="text" id="title" style="width: 16rem;">
@@ -28,10 +36,10 @@
             </form>
           </div>
           <div class="col" id="doing" dropzone>
-            Column
+            <h2>Doing</h2>
           </div>
           <div class="col" id="done" dropzone>
-            Column
+            <h2>Done</h2>
           </div>
         </div>
       </div>

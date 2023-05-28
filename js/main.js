@@ -14,7 +14,7 @@ taskCards.forEach(elemento => {
 
 newCardButton.addEventListener("click", () => {
     form.classList.contains("d-none") ? form.classList.remove("d-none") : form.classList.add("d-none");
-    form.classList.contains("d-none") ? newCardButton.innerHTML = "+" : newCardButton.innerHTML = "-"
+    newCardButton.classList.add("d-none")
 });
 
 form.addEventListener("submit", (e) => {
@@ -34,7 +34,7 @@ form.addEventListener("submit", (e) => {
     if (exist) {
         taskCard.id = exist.id;
         taskCards[taskCards.findIndex(elemento => elemento.id === exist.id)] = taskCard;
-        newCardButton.innerHTML = "+";
+        newCardButton.classList.remove("d-none");
     } else {
         taskCard.id = taskCards[taskCards.length - 1] ? (taskCards[taskCards.length - 1]).id + 1 : 0;
 
@@ -113,7 +113,7 @@ function createNewCard(taskCard) {
     let body = document.getElementById("todo");
     body.insertBefore(divNewCard, null);
 
-    newCardButton.innerHTML = "+";
+    newCardButton.classList.remove("d-none");
 }
 
 

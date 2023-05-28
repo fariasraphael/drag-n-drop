@@ -2,9 +2,9 @@ let form = document.getElementsByTagName("form")[0];
 let newCardButton = document.getElementsByTagName("button")[0];
 let taskCards = JSON.parse(localStorage.getItem("taskCard")) || []
 
-let todo = document.querySelector(".todo");
-let doing = document.querySelector(".doing");
-let done = document.querySelector(".done");
+let todo = document.querySelector("#todo");
+let doing = document.querySelector("#doing");
+let done = document.querySelector("#done");
 
 taskCards.forEach(elemento => {
     createNewCard(elemento);
@@ -88,17 +88,30 @@ function createNewCard(taskCard) {
 
     divNewCard.appendChild(buttonDelete);
     divNewCard.appendChild(buttonEdit);
-    divNewCard.appendChild(divNewCardBody)
+    divNewCard.appendChild(divNewCardBody);
+
+    divNewCard.ondragstart = event => {
+        event.dataTransfer.setData("tarefa-id", event.target.id);
+        if (divNewCard.parentElement === todo) {
+            todo.classList.remove("avaliable-to-drop");
+            doing.classList.add("avaliable-to-drop");
+            done.classList.add("avaliable-to-drop");
+        } else if (divNewCard.parentElement === doing) {
+            doing.classList.remove("avaliable-to-drop");
+            todo.classList.add("avaliable-to-drop");
+            done.classList.add("avaliable-to-drop");
+        } else {
+            done.classList.remove("avaliable-to-drop");
+            doing.classList.add("avaliable-to-drop");
+            todo.classList.add("avaliable-to-drop");
+        }
+    }
 
 
-
-    let body = document.getElementById("toDo");
+    let body = document.getElementById("todo");
     body.insertBefore(divNewCard, null);
 
     newCardButton.innerHTML = "+";
-
-    //dragStart(divNewCard);
-
 }
 
 
@@ -134,22 +147,22 @@ dropzones.forEach(dropzone => {
 
 
 
-/* function dragStart(element) { */
-/*  */
-/*     element.ondragstart = event => { */
-/*         event.dataTransfer.setData("tarefa-id", event.target.id); */
-/*         if (element.parentElement === todo) { */
-/*             todo.classList.remove("avaliable-to-drop"); */
-/*             doing.classList.add("avaliable-to-drop"); */
-/*             done.classList.add("avaliable-to-drop"); */
-/*         } else if (element.parentElement === doing) { */
-/*             doing.classList.remove("avaliable-to-drop"); */
-/*             todo.classList.add("avaliable-to-drop"); */
-/*             done.classList.add("avaliable-to-drop"); */
-/*         } else { */
-/*             done.classList.remove("avaliable-to-drop"); */
-/*             doing.classList.add("avaliable-to-drop"); */
-/*             todo.classList.add("avaliable-to-drop"); */
-/*         } */
-/*     } */
-/* } */
+function dragStart(element) {
+
+    element.ondragstart = event => {
+        event.dataTransfer.setData("tarefa-id", event.target.id);
+        if (element.parentElement === todo) {
+            todo.classList.remove("avaliable-to-drop");
+            doing.classList.add("avaliable-to-drop");
+            done.classList.add("avaliable-to-drop");
+        } else if (element.parentElement === doing) {
+            doing.classList.remove("avaliable-to-drop");
+            todo.classList.add("avaliable-to-drop");
+            done.classList.add("avaliable-to-drop");
+        } else {
+            done.classList.remove("avaliable-to-drop");
+            doing.classList.add("avaliable-to-drop");
+            todo.classList.add("avaliable-to-drop");
+        }
+    }
+}

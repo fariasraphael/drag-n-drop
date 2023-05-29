@@ -50,16 +50,18 @@ function createNewCard(taskCard) {
     divNewCard.classList.add("card", "d-flex", "flex-row-reverse", "align-items-start");
     divNewCard.style.width = "16rem";
 
-    let buttonEdit = document.createElement("a");
-    buttonEdit.classList.add("btn", "btn-primary");
-    buttonEdit.innerHTML = "*";
+    let buttonEdit = document.createElement("i");
+    buttonEdit.classList.add("btn", "btn-primary", "fa-solid", "fa-pen", "fa-xs");
+    buttonEdit.style.padding = "6% 4%";
+    buttonEdit.style.margin = "4px 2px";
     buttonEdit.addEventListener("click", e => {
         editTask(e)
     })
 
-    let buttonDelete = document.createElement("a");
-    buttonDelete.classList.add("btn", "btn-outline-danger");
-    buttonDelete.innerHTML = "-";
+    let buttonDelete = document.createElement("i");
+    buttonDelete.classList.add("btn", "btn-outline-danger", "fa-regular", "fa-trash-can", "fa-xs");
+    buttonDelete.style.padding = "6% 4%";
+    buttonDelete.style.margin = "4px 2px";
     buttonDelete.addEventListener("click", e => {
 
 
@@ -116,6 +118,16 @@ function createNewCard(taskCard) {
     newCardButton.classList.remove("d-none");
 }
 
+function editTask(element) {
+    let titleEdit = element.target.parentElement.children[2].firstChild.innerHTML;
+    let descriptionEdit = element.target.parentElement.children[2].lastChild.innerHTML;
+    console.log(titleEdit, descriptionEdit);
+    form.classList.remove("d-none")
+    form.elements["title"].value = titleEdit;
+    form.elements["descirption"].value = descriptionEdit;
+    element.target.parentElement.remove();
+
+}
 
 let dropzones = document.querySelectorAll("[dropzone]")
 dropzones.forEach(dropzone => {
@@ -133,13 +145,11 @@ dropzones.forEach(dropzone => {
     }
 });
 
-function editTask(element) {
-    let titleEdit = element.target.parentElement.children[2].firstChild.innerHTML;
-    let descriptionEdit = element.target.parentElement.children[2].lastChild.innerHTML;
-    console.log(titleEdit, descriptionEdit);
-    form.classList.remove("d-none")
-    form.elements["title"].value = titleEdit;
-    form.elements["descirption"].value = descriptionEdit;
-    element.target.parentElement.remove();
 
-}
+
+
+
+
+
+
+

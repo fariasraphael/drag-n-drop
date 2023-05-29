@@ -63,13 +63,8 @@ function createNewCard(taskCard) {
     buttonDelete.style.padding = "6% 4%";
     buttonDelete.style.margin = "4px 2px";
     buttonDelete.addEventListener("click", e => {
-
-
-
         taskCards.splice(taskCards.findIndex(elemento => elemento.id == e.target.parentElement.dataset.id), 1);
         e.target.parentElement.remove();
-
-
         localStorage.setItem("taskCard", JSON.stringify(taskCards));
     });
 
@@ -118,14 +113,21 @@ function createNewCard(taskCard) {
     newCardButton.classList.remove("d-none");
 }
 
-function editTask(element) {
-    let titleEdit = element.target.parentElement.children[2].firstChild.innerHTML;
-    let descriptionEdit = element.target.parentElement.children[2].lastChild.innerHTML;
-    console.log(titleEdit, descriptionEdit);
+function editTask(e) {
+
+    console.log(e.target.parentElement.dataset.id);
+    const taskToEdit = taskCards.findIndex(elemento => elemento.id == e.target.parentElement.dataset.id);
+    
     form.classList.remove("d-none")
-    form.elements["title"].value = titleEdit;
-    form.elements["descirption"].value = descriptionEdit;
-    element.target.parentElement.remove();
+    form.elements["title"].value = taskCards[taskToEdit].title;
+    form.elements["descirption"].value = taskCards[taskToEdit].description;
+    
+    taskCards.splice(taskToEdit, 1);
+    e.target.parentElement.remove();
+    localStorage.setItem("taskCard", JSON.stringify(taskCards));
+    
+    
+
 
 }
 
@@ -144,12 +146,3 @@ dropzones.forEach(dropzone => {
         }
     }
 });
-
-
-
-
-
-
-
-
-

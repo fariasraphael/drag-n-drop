@@ -12,7 +12,7 @@ h2{
     background-color: #cacaca;
 }
 
-[id^="draggable-item"] {
+[id^="draggable-item"], #newCardButton {
     box-shadow: 0px 8px 4px 0px rgba(0, 0, 0, 0.1);
     margin: 16px auto;
     border-radius: 4px;
